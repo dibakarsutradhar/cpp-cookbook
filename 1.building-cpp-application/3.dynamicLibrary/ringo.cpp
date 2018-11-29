@@ -3,6 +3,6 @@
 
 using namespace std;
 
-int main() {
+void ringo() {
     cout << "and Ringo\n";
 }
