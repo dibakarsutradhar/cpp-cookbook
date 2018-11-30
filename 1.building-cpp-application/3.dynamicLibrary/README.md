@@ -27,13 +27,13 @@ To define MARCOS I had to use the -D option to ensure that my dynamic library's 
 g++ -c -DGEORGERINGO_DLL -o georgeringo.o georgeringo.cpp
 ```
 After creating the objects, now it's time to create the dynamic library.
-To do that, the linkers requires an option to tell it to build a dynamic library rather than an executable file. Most linkers use the option **'-shared'** and it'll create a shared library named **libgeorgeringo.dll**. **'-Wl,--out-implib,libgeorgeringo.dll.a'** inputted this command to import **'libgeorgeringo.dll.a'** library. To force the linker to export all symbols, used **'--export-all-symbols-Wl'**. The letter following **W** is a lowercase(**l**). Also inputted **'--enable-auto-image-base'**, so that the operating system don't attempt to load two dynamic libraries at the same location; using this option helps to speed DLL loading.
+To do that, the linkers requires an option to tell it to build a dynamic library rather than an executable file. Most linkers use the option **'-shared'**. By using **-fPIC** command, told linkers to generate poisition-independent code, followed by the library name and all the objects from the library will be created.
 
 ```
-g++ -shared -o libgeorgeringo.dll-Wl,--out-implib,libgeorgeringo.dll.a-W1,--export-all-symbols-Wl,--enable-auto-image-base george.o ringo.o georgeringo.o
+g++ -shared -fPIC -o libgeorgeringo.so george.o ringo.o georgeringo.o
 ```
 
-and it'll solve the problem and will create a dynamic library named **[libgeorgeringo.dll-Wl,--out-implib,libgeorgeringo.dll](https://github.com/dibakarsutradhar/cpp-cookbook/blob/master/1.building-cpp-application/3.dynamicLibrary/libgeorgeringo.dll-Wl%2C--out-implib%2Clibgeorgeringo.dll.a-W1%2C--export-all-symbols-Wl%2C--enable-auto-image-base)**
+and it'll solve the problem and will create a dynamic library named **[libgeorgeringo.so](https://github.com/dibakarsutradhar/cpp-cookbook/blob/master/1.building-cpp-application/3.dynamicLibrary/libgeorgeringo.so)**
 
 
 ### DISCUSSION
